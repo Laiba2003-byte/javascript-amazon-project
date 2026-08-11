@@ -1,3 +1,5 @@
+import { paymentSummary } from "../data/paymentSummary.js";
+
 export let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 export function addToCart(productId) {
@@ -18,6 +20,7 @@ export function addToCart(productId) {
       deliveryOptionId: 1
     });
   }
+
 
   saveToStorage();
 }

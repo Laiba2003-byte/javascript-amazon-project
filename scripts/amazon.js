@@ -87,3 +87,4 @@ document.querySelectorAll('.js-addTocart').forEach((button) => {
     updateCartQuantity();
   });
 });
+updateCartQuantity();
