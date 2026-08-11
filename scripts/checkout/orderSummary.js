@@ -6,6 +6,7 @@ import {
   updateDeliveryOption,
 } from "../cart.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { formatCurrency } from "../utils/money.js";
 const checkoutContainer = document.querySelector(".js-order-summary");
 import dayjs from "https://cdn.jsdelivr.net/npm/dayjs@1/+esm";
 import {renderPaymentSummary} from "./paymentSummary.js";
@@ -45,7 +46,7 @@ export function renderSummary() {
                       ${product.name}
                     </div>
                     <div class="product-price">
-                      $${(product.priceCents / 100).toFixed(2)}
+                      $${formatCurrency(product.priceCents)}
                     </div>
                     <div class="product-quantity">
                       <span>
@@ -99,7 +100,7 @@ export function renderSummary() {
               ${formattedDate}
             </div>
             <div class="delivery-option-price">
-              $${(deliveryOption.priceCents / 100).toFixed(2)} - Shipping
+              $${formatCurrency(deliveryOption.priceCents)} - Shipping
             </div>
           </div>
       </div>
