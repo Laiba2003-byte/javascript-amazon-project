@@ -9,10 +9,49 @@
         margin: 40px;
         line-height: 1.5;
       }
+
+      .product {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        max-width: 320px;
+        padding: 20px;
+      }
+
+      .product-image {
+        height: 180px;
+        max-width: 100%;
+        object-fit: contain;
+      }
+
+      .rating-image {
+        width: 100px;
+      }
     </style>
   </head>
   <body>
-    <h1>Test Page</h1>
-    <p>This page is separate from the Amazon project code.</p>
+    <h1>Product Test Page</h1>
+    <p id="status">Loading product...</p>
+    <div class="js-test-result"></div>
+
+    <script type="module">
+      import { products } from './data/products.js';
+
+      // Pick a clothing product so extraInfoHTML() displays the size chart.
+      const product = products.find((item) => item.sizeChartLink) || products[0];
+
+      document.querySelector('.js-test-result').innerHTML = `
+        <div class="product">
+          <img class="product-image" src="${product.image}" alt="${product.name}">
+          <h2>${product.name}</h2>
+          <img class="rating-image" src="${product.getstarsUrl()}" alt="${product.rating.stars} stars">
+          <p>${product.rating.count} reviews</p>
+          <strong>${product.getPrice()}</strong>
+          <p>${product.extraInfoHTML()}</p>
+        </div>
+      `;
+
+      document.querySelector('#status').textContent =
+        `Loaded ${products.length} products successfully.`;
+    </script>
   </body>
 </html>
