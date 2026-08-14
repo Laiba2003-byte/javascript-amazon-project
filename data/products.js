@@ -1,5 +1,5 @@
 
-import { formatCurrency } from "../scripts/utils/money"
+import { formatCurrency } from "../scripts/utils/money.js"
 class Product {
     id
     image
@@ -20,7 +20,29 @@ class Product {
     }
     getPrice()
     {
-      return `$${formatCurrency(this.priceCents)}`;    }
+      return `$${formatCurrency(this.priceCents)}`;    
+    }
+    extraInfoHTML()
+    {
+      return '';
+    }
+}
+
+class Clothing extends Product{
+
+
+    constructor(productData) {
+       super(productData)
+        this.sizeChartLink = productData.sizeChartLink;
+    }
+   extraInfoHTML() 
+   {
+      return `
+        <a href="${this.sizeChartLink}" target="_blank">
+          Size Chart
+        </a>
+      `;
+    }
 }
 
 export const products = [
@@ -685,7 +707,10 @@ export const products = [
   }
 ].map( (productDetails)=>
 {
-  new Product(productDetails);
-}
 
-);
+    if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  }
+
+  return new Product(productDetails);
+});
